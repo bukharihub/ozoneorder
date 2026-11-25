@@ -1,0 +1,6 @@
+{
+  "name": "Ozone Enterprise - Sales, Gate Pass & Ledger System",
+  "description": "Enterprise Sales Order, GDN, Gate Pass, Sales Tax Invoice, Bank Receipt and Customer Ledger system for Ozone Enterprise Karachi (NTN: 7217629-7, STRN: 3277876123475).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

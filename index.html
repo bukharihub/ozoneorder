@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sale Order Console — Enterprise Order, Stock &amp; Ledger Management</title>
+    <meta name="description" content="Sale Order Console — enterprise order, stock and ledger management for authorized company users." />
+    
+    <!-- Vercel-GitHub Cache-Busting & Build Sync Directives -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="build-version" content="2026.10.06.v4-smart-login" />
+    <meta name="deployment-platform" content="Vercel" />
+    <meta name="cache-bust-tag" content="202610060139" />
+
+    <!-- Open Graph & Social Cards -->
+    <meta property="og:title" content="Sale Order Console — Enterprise Order, Stock & Ledger Management" />
+    <meta property="og:description" content="Sale Order Console — enterprise order, stock and ledger management for authorized company users." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Theme & Baseline Styling -->
+    <meta name="theme-color" content="#020617" />
+    <style>
+      /* Zero-FOUC Dark Background */
+      html, body {
+        background-color: #020617;
+        color: #f8fafc;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+      #app-preloader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, #0f172a 0%, #020617 100%);
+      }
+      .pulse-spinner {
+        width: 48px;
+        height: 48px;
+        border: 3px solid rgba(6, 182, 212, 0.2);
+        border-top-color: #06b6d4;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      /* Direct White-Background Document Printing Rules */
+      @media print {
+        html, body {
+          background-color: #ffffff !important;
+          background: #ffffff !important;
+          color: #000000 !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          height: auto !important;
+          min-height: 0 !important;
+          overflow: visible !important;
+        }
+        #app-preloader {
+          display: none !important;
+        }
+      }
+    </style>
+
+    <!-- Self-Healing Pre-Hydration Crash-Catcher -->
+    <script>
+      (function() {
+        window.__DIAPER_ERP_VERSION__ = "2026.10.06.v4";
+        
+        // Listen for unhandled promise rejections and gracefully prevent runtime disruption
+        window.addEventListener('unhandledrejection', function(e) {
+          if (e) {
+            try { e.preventDefault(); } catch(ign) {}
+          }
+          var reason = e ? (e.reason || e) : null;
+          var reasonStr = reason ? (typeof reason === 'string' ? reason : (reason.message || '')) : '';
+          
+          if (console && console.warn) {
+            console.warn('[Diagnostic Catcher] Handled Promise Rejection:', reasonStr || reason);
+          }
+          
+          // If a dynamic import chunk fails due to fresh Vercel deployment, trigger fresh sync
+          if (reasonStr && (reasonStr.indexOf('Failed to fetch dynamically imported module') !== -1 || reasonStr.indexOf('Loading chunk') !== -1)) {
+            forceFreshReload();
+          }
+        });
+
+        // Listen for fatal script loading errors before React mounts
+        window.addEventListener('error', function(e) {
+          var msg = (e && e.message) ? e.message : '';
+          if (msg.indexOf('ResizeObserver') !== -1 || msg.indexOf('Script error') !== -1) {
+            return;
+          }
+          if (console && console.warn) {
+            console.warn('[Diagnostic Catcher] Handled Window Error:', msg);
+          }
+          if (msg.indexOf('Failed to fetch') !== -1 || msg.indexOf('SyntaxError') !== -1) {
+            renderRecoveryPanel(msg);
+          }
+        });
+
+        function forceFreshReload() {
+          try {
+            if (typeof window !== 'undefined' && 'caches' in window && caches && caches.keys) {
+              caches.keys().then(function(names) {
+                names.forEach(function(n) { caches.delete(n); });
+              }).catch(function() {});
+            }
+          } catch(err) {}
+          var url = window.location.origin + window.location.pathname + '?sync=' + Date.now();
+          window.location.replace(url);
+        }
+
+        window.__forceFreshReload = forceFreshReload;
+
+        function renderRecoveryPanel(msg) {
+          var root = document.getElementById('root');
+          if (!root || root.innerHTML.indexOf('Sale Order Console') !== -1) return; // React already mounted
+          
+          root.innerHTML = [
+            '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#020617;padding:20px;font-family:sans-serif;">',
+            '  <div style="max-width:520px;width:100%;background:#0f172a;border:1px solid rgba(239,68,68,0.4);border-radius:24px;padding:32px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);">',
+            '    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">',
+            '      <div style="width:40px;height:40px;border-radius:12px;background:rgba(239,68,68,0.2);color:#ef4444;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:bold;">!</div>',
+            '      <div>',
+            '        <h3 style="margin:0;color:#fff;font-size:18px;font-weight:bold;">Deployment Sync Diagnostic</h3>',
+            '        <p style="margin:2px 0 0;color:#94a3b8;font-size:12px;font-family:monospace;">Sale Order Console</p>',
+            '      </div>',
+            '    </div>',
+            '    <div style="background:#020617;border:1px solid #1e293b;border-radius:12px;padding:12px;color:#f87171;font-size:12px;font-family:monospace;margin-bottom:20px;word-break:break-all;">',
+            '      ' + msg,
+            '    </div>',
+            '    <p style="color:#cbd5e1;font-size:12px;line-height:1.6;margin-bottom:24px;">',
+            '      Detected a cached asset discrepancy from a previous Vercel deployment. Click below to synchronize your browser with the latest live GitHub build.',
+            '    </p>',
+            '    <button onclick="window.__forceFreshReload()" style="width:100%;padding:14px;background:#06b6d4;color:#020617;font-weight:bold;font-size:13px;border:none;border-radius:12px;cursor:pointer;font-family:monospace;text-transform:uppercase;letter-spacing:0.05em;">',
+            '      Flush Cache & Sync With Live Build',
+            '    </button>',
+            '  </div>',
+            '</div>'
+          ].join('\n');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- Root Mounting Container with Initial Preloader -->
+    <div id="root">
+      <div id="app-preloader">
+        <div class="pulse-spinner"></div>
+        <div style="margin-top: 18px; font-weight: 800; font-size: 15px; letter-spacing: 0.15em; color: #fff; font-family: monospace;">
+          SALE ORDER CONSOLE
+        </div>
+        <div style="margin-top: 6px; font-size: 11px; color: #64748b; font-family: monospace;">
+          Loading secure workspace...
+        </div>
+      </div>
+    </div>
+
+    <!-- Application Script Bundle -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

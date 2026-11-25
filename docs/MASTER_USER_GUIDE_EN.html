@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OZONE Enterprise ERP — Master User Guide (English)</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #eef2f7; color: #0f172a; font: 14px/1.65 "Segoe UI", Arial, sans-serif; }
+    .page { width: min(980px, 94vw); margin: 28px auto; padding: 44px 52px; background: #fff; border: 1px solid #d7e3ee; border-radius: 14px; box-shadow: 0 18px 50px rgba(15,23,42,.08); }
+    h1 { margin: 0 0 6px; font-size: 28px; color: #0c4a6e; }
+    h2 { margin: 30px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #0ea5e9; font-size: 19px; color: #075985; }
+    h3 { margin: 18px 0 6px; font-size: 15px; color: #1e293b; }
+    p, li { margin: 6px 0; }
+    ol, ul { padding-left: 22px; }
+    .brand { color: #475569; font-size: 12px; font-weight: 700; }
+    .sub { color: #64748b; font-size: 13px; }
+    .badge { display: inline-block; margin: 2px 4px 2px 0; padding: 3px 9px; border-radius: 999px; background: #e0f2fe; color: #075985; font-size: 11px; font-weight: 700; }
+    .box { margin: 14px 0; padding: 14px 18px; border-left: 4px solid #0ea5e9; background: #f0f9ff; border-radius: 0 8px 8px 0; }
+    .warn { border-left-color: #f59e0b; background: #fffbeb; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+    th, td { border: 1px solid #cbd5e1; padding: 8px 10px; text-align: left; vertical-align: top; font-size: 12px; }
+    th { background: #e2e8f0; color: #0f172a; }
+    .footer { margin-top: 32px; padding-top: 14px; border-top: 1px solid #cbd5e1; font-size: 11px; color: #475569; text-align: center; }
+    .no-print { text-align: center; margin: 18px auto; }
+    .no-print button { padding: 10px 20px; border: 0; border-radius: 8px; background: #0369a1; color: #fff; font-weight: 700; cursor: pointer; }
+    @media print {
+      @page { size: A4 portrait; margin: 12mm; }
+      html, body { background: #fff !important; color: #000 !important; }
+      body * { box-shadow: none !important; }
+      .page { width: 100%; margin: 0; padding: 0; border: 0; border-radius: 0; background: #fff !important; }
+      h1, h2, h3, p, li, th, td, .brand, .sub, .footer { color: #000 !important; }
+      .box, .warn, th { background: #fff !important; }
+      .no-print { display: none !important; }
+      h2 { break-after: avoid; }
+      table, .box { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <p class="brand">OZONE Enterprise ERP · Master User Guide</p>
+    <h1>OZONE Enterprise ERP</h1>
+    <p class="sub">Complete bilingual operations guide for Super Admin, Company Admin, Store / FG, Accounts and Customer users. Branded: Syed Shoaib Ali Shah Bukhari (Bukharihub) · © 2026 All Rights Reserved.</p>
+    <div class="no-print"><button type="button" onclick="window.print()">Print / Save PDF</button></div>
+
+    <h2>1. System Overview &amp; Key Business Benefits</h2>
+    <p>OZONE Enterprise ERP is a multi-company, multi-user vapour-and-diaper distribution ERP. It runs as a Next.js web application at <strong>https://ozoneso.vercel.app</strong> and as a Windows desktop wrapper that opens the same web application. Data is stored per company in Supabase Postgres; access is controlled by custom 12-hour sessions, role permissions and row-level security.</p>
+    <p><strong>The core document chain is strict:</strong> Sales Order → GDN / Gate Pass → Sales Tax Invoice → Bank Receipt → Customer Ledger &amp; Reports. Each stage can only be created by the correct role, and a document cannot be edited once its downstream document exists.</p>
+    <h3>Problems it solves</h3>
+    <ul>
+      <li>Paper vouchers, duplicate voucher numbers and manual register errors.</li>
+      <li>Finished-goods stock mismatches between orders, dispatch and invoices.</li>
+      <li>Manual calculation of 18% sales tax, 4% further tax and Section 236G advance tax.</li>
+      <li>No clear view of customer dues, aging, booking agents and bank accounts.</li>
+      <li>Staff seeing prices, other companies' data or documents outside their job role.</li>
+      <li>Owners unable to control demo periods, licences, users or company access.</li>
+    </ul>
+    <h3>Time-saving and accuracy benefits</h3>
+    <ul>
+      <li>Automatic yearly voucher sequences with atomic counters — no duplicated numbers.</li>
+      <li>Live FG stock: cartons and pieces update automatically only when a GDN is posted.</li>
+      <li>Sales order status recalculates automatically as PENDING, PARTIAL_DELIVERED or DELIVERED.</li>
+      <li>Auto tax engine for registered and unregistered customers, with amount-in-words.</li>
+      <li>Instant receivables aging buckets: 0–30, 31–60, 61–90 and 90+ days.</li>
+      <li>Print-ready A4 vouchers with company logo, bank details and signatures.</li>
+      <li>Customer self-service portal for placing and tracking orders.</li>
+      <li>Company isolation, hidden-rate accounts, entry locks and licence locks enforced in the database.</li>
+    </ul>
+    <div class="box"><strong>Roles in this system:</strong> SUPER_ADMIN, COMPANY_ADMIN, STORE_FG, ACCOUNTS, CUSTOMER.</div>
+
+    <h2>2. Getting Started &amp; Access Guide</h2>
+    <h3>Open the application</h3>
+    <ol>
+      <li>Web: open <strong>https://ozoneso.vercel.app</strong> in Chrome or Edge.</li>
+      <li>Desktop: launch <strong>OZONE Enterprise ERP</strong>. It opens the same URL; an internet connection is required. If offline, a branded retry screen appears — check the connection and click <strong>Retry Connection</strong>.</li>
+      <li>Enter the <strong>Company Code</strong> (default demo company: OZONE). The system verifies the company automatically and may show the company name and logo.</li>
+      <li>Enter your <strong>Username</strong> and <strong>Password</strong>, then click <strong>Sign in</strong>.</li>
+      <li>Sessions last 12 hours and are stored only in this browser. Always click <strong>Sign out</strong> when finished on a shared computer.</li>
+    </ol>
+    <h3>After login</h3>
+    <ul>
+      <li><strong>CUSTOMER</strong> users land directly in the Customer Portal with only Place New Order and Track My Orders.</li>
+      <li>All other roles land on the Dashboard with a role-filtered sidebar.</li>
+      <li>Click <strong>Change Password</strong> in the header to update your own password (minimum 6 characters).</li>
+      <li>If your account has hidden rates, a banner confirms that rate and amount columns are intentionally blanked.</li>
+    </ul>
+    <h3>First-time organisation setup (Super Admin / Company Admin)</h3>
+    <ol>
+      <li>Administration → create users for Store, Accounts and each customer contact.</li>
+      <li>Products / FG Stock → add products with size, type, HS code, diapers per bag, bags per carton and opening cartons.</li>
+      <li>Customers → add customer master records with CNIC/NTN, STRN, registration status, filer status, bank account and branch.</li>
+      <li>Administration → set the company logo, bank details and licence information (Super Admin only for company profile).</li>
+      <li>For a new company, Super Admin uses the company wizard, imports product/customer CSVs and downloads the build configuration.</li>
+    </ol>
+    <div class="box warn"><strong>Demo and licence:</strong> demo companies auto-lock 7 days after the demo start date. The login screen then shows the owner contact and a WhatsApp link. A locked/blocked company cannot be used until the owner extends the demo or converts it to a full licence.</div>
+
+    <h2>3. Role-by-Role Step-by-Step Operations Manual</h2>
+    <h3>3.1 SUPER_ADMIN — Master Owner</h3>
+    <p>Full access to every company and module. In addition to daily operations, the Super Admin performs governance in <strong>Administration → Super Admin — Company Master Control</strong>:</p>
+    <ol>
+      <li>Use <strong>Suspend / Activate</strong> to block or restore a company.</li>
+      <li>Use <strong>+7 Days</strong> to extend a demo, or <strong>Convert Full</strong> to remove demo mode.</li>
+      <li>Use <strong>Factory Reset</strong> only with written approval: type the exact company code, confirm, and the system clears the master ledger, restores opening stock and resets voucher sequences while preserving customers, products, companies and users.</li>
+      <li>Use <strong>New Company Setup &amp; Template Wizard</strong> to create a company, import CSV master data, set expiry and download the desktop build config.</li>
+      <li>Company profile, logo, licence dates and owner contact are editable only by Super Admin.</li>
+      <li>Confidential founder playbooks are available only through the owner-only in-app section and are never shown to other roles.</li>
+    </ol>
+    <h3>3.2 COMPANY_ADMIN — Company Manager</h3>
+    <ol>
+      <li>Manage users: create/edit accounts, set roles, link customers to booker/customer logins, set permissions, hide rates or allow lock bypass.</li>
+      <li>Create customer logins from the Customers page and copy the ready WhatsApp credential message.</li>
+      <li>Use all voucher modules, products, customers, ledger, reports and printing.</li>
+      <li>Change passwords for your own account; you cannot modify company profile/logo or create another SUPER_ADMIN.</li>
+    </ol>
+    <h3>3.3 STORE_FG — Store / Finished Goods</h3>
+    <ol>
+      <li>Open <strong>Sales Orders</strong> and review orders with pending cartons.</li>
+      <li>Open <strong>GDN &amp; Gate Pass</strong> → <strong>New GDN / Gate Pass</strong>, select the sales order, enter delivered cartons, vehicle, driver and remarks.</li>
+      <li>Click <strong>Post GDN &amp; Gate Pass</strong>. Stock is deducted immediately and the sales order status updates automatically.</li>
+      <li>Print the GDN/Gate Pass using the view/print action and hand it to the dispatch team.</li>
+      <li>Do not delete a GDN after an invoice exists — the database blocks it.</li>
+    </ol>
+    <h3>3.4 ACCOUNTS — Accounts / Finance</h3>
+    <ol>
+      <li>Open <strong>Sales Tax Invoices</strong> → <strong>New invoice</strong>, choose an unbilled GDN, verify rates and tax, then generate the invoice.</li>
+      <li>Open <strong>Bank Receipts</strong> → <strong>New receipt</strong>, choose an unpaid invoice or enter the amount, bank account and reference, then post the receipt.</li>
+      <li>Use <strong>Customer Ledger</strong> to review invoiced, received and balance amounts by customer/booker and print the ledger.</li>
+      <li>Use <strong>Reports &amp; Exports</strong> for aging, FG stock sheet, ledger CSV and full Excel export.</li>
+    </ol>
+    <h3>3.5 CUSTOMER / Distributor — Customer Portal</h3>
+    <ol>
+      <li>Log in with the credentials shared by your company administrator.</li>
+      <li>On <strong>Place New Order</strong>, select a linked customer (registered customers are queued first), enter cartons per product and use <strong>Save &amp; Next</strong>.</li>
+      <li>Review the auto-grouped order queue and click <strong>Submit All Customer Orders</strong>. Each customer becomes a separate sales order.</li>
+      <li>On <strong>Track My Orders</strong>, refresh to see live status: Order Placed → Preparing / Partial Dispatch → Dispatched &amp; On the Way → Invoiced &amp; Completed.</li>
+      <li>Print invoices where permitted. Rates and amounts are hidden for customer accounts by design.</li>
+    </ol>
+
+    <h3>3.6 Daily document workflow at a glance</h3>
+    <table>
+      <tr><th>Stage</th><th>Role that creates it</th><th>What it does</th></tr>
+      <tr><td>Sales Order</td><td>COMPANY_ADMIN, SUPER_ADMIN, CUSTOMER (own linked customers)</td><td>Records ordered cartons; does not change FG stock.</td></tr>
+      <tr><td>GDN / Gate Pass</td><td>STORE_FG, COMPANY_ADMIN, SUPER_ADMIN</td><td>Dispatch; deducts stock and updates SO status.</td></tr>
+      <tr><td>Sales Tax Invoice</td><td>ACCOUNTS, COMPANY_ADMIN, SUPER_ADMIN</td><td>Calculates tax and posts receivable.</td></tr>
+      <tr><td>Bank Receipt</td><td>ACCOUNTS, COMPANY_ADMIN, SUPER_ADMIN</td><td>Posts payment against invoice; reduces balance.</td></tr>
+    </table>
+
+    <h2>4. Reports, Analytics, Security Rules &amp; FAQs</h2>
+    <h3>Dashboard</h3>
+    <ul>
+      <li>KPIs: total sales orders, total revenue, fulfilment rate and recovery rate.</li>
+      <li>Monthly chart compares Sales Order Value and Invoiced Revenue in PKR.</li>
+      <li>Customer insights show repeat customers, active customers, average order value and registration segments.</li>
+      <li>System status cards show Web Portal, Customer App, FG Inventory, Bank Ledger and Supabase Sync; <em>Offline</em> means that data source failed to load.</li>
+    </ul>
+    <h3>Reports &amp; Exports</h3>
+    <ul>
+      <li><strong>Ledger CSV</strong> exports customer ledger rows.</li>
+      <li><strong>Full Excel export</strong> exports the company workbook via XLSX.</li>
+      <li>Aging applies receipts FIFO to invoices and buckets outstanding amounts into 0–30, 31–60, 61–90 and 90+ days.</li>
+      <li>Printable ledger/report titles are booker/agent-wise and include bank account details.</li>
+    </ul>
+    <h3>Security and locking rules</h3>
+    <ul>
+      <li>Company data is isolated: users only see their own company unless they are SUPER_ADMIN.</li>
+      <li>Role permissions control view/create/edit/delete/print for each module; the database re-checks every mutation.</li>
+      <li>Customer logins are linked to specific customers and can only create sales orders for those customers.</li>
+      <li>Documents older than 3 days, or dated on/before the entry lock date, are locked. Super Admin, Company Admin or a bypass user can override.</li>
+      <li>A document with a downstream record is immutable: SO with GDN, GDN with invoice, invoice with receipt.</li>
+      <li>Sessions expire after 12 hours; company licence/demo locks can block login entirely.</li>
+    </ul>
+    <h3>Common FAQs</h3>
+    <table>
+      <tr><th>Problem</th><th>What to do</th></tr>
+      <tr><td>"Auto-Locked (&gt;3 Days)"</td><td>Ask Company Admin/Super Admin to edit, or a user with lock bypass. Do not change the voucher date.</td></tr>
+      <tr><td>"Permission denied"</td><td>Your role does not include that action. Ask the administrator to update your permissions.</td></tr>
+      <tr><td>"Insufficient stock"</td><td>Reduce delivered cartons or post/receive stock before dispatching.</td></tr>
+      <tr><td>Blank rate columns</td><td>Your account has hidden rates enabled; this is intentional.</td></tr>
+      <tr><td>Demo expired</td><td>Contact the owner using the WhatsApp link shown on the lock screen.</td></tr>
+      <tr><td>Desktop shows offline screen</td><td>Check internet, then click Retry Connection. The desktop app always loads the live web ERP.</td></tr>
+      <tr><td>Duplicate voucher number fear</td><td>Numbering is atomic per company/year; never edit voucher numbers manually.</td></tr>
+    </table>
+    <div class="footer">Engineered &amp; Developed by Syed Shoaib Ali Shah Bukhari (Bukharihub) · © 2026 All Rights Reserved</div>
+  </div>
+</body>
+</html>

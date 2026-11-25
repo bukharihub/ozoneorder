@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CONFIDENTIAL FOUNDER PLAYBOOK — OZONE Enterprise ERP</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #eef2f7; color: #0f172a; font: 14px/1.65 "Segoe UI", Arial, sans-serif; }
+    .page { width: min(1020px, 95vw); margin: 28px auto; padding: 44px 52px; background: #fff; border: 1px solid #d7e3ee; border-radius: 14px; box-shadow: 0 18px 50px rgba(15,23,42,.08); }
+    .secret { padding: 10px 14px; border: 2px solid #b91c1c; border-radius: 8px; background: #fef2f2; color: #991b1b; font-weight: 800; text-align: center; }
+    h1 { margin: 16px 0 4px; font-size: 27px; color: #0c4a6e; }
+    h2 { margin: 30px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #0ea5e9; font-size: 19px; color: #075985; }
+    h3 { margin: 18px 0 6px; font-size: 15px; color: #1e293b; }
+    p, li { margin: 6px 0; }
+    ol, ul { padding-left: 22px; }
+    .ur { direction: rtl; font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Gulzar", "Segoe UI", serif; line-height: 2; font-size: 15px; }
+    .sub, .brand { color: #475569; font-size: 12px; }
+    .box { margin: 14px 0; padding: 14px 18px; border-left: 4px solid #0ea5e9; background: #f0f9ff; border-radius: 0 8px 8px 0; }
+    .box.ur { border-left: 0; border-right: 4px solid #0ea5e9; border-radius: 8px 0 0 8px; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+    th, td { border: 1px solid #cbd5e1; padding: 8px 10px; text-align: left; vertical-align: top; font-size: 12px; }
+    th { background: #e2e8f0; }
+    .footer { margin-top: 32px; padding-top: 14px; border-top: 1px solid #cbd5e1; font-size: 11px; color: #475569; text-align: center; }
+    .no-print { text-align: center; margin: 18px auto; }
+    .no-print button { padding: 10px 20px; border: 0; border-radius: 8px; background: #991b1b; color: #fff; font-weight: 700; cursor: pointer; }
+    @media print {
+      @page { size: A4 portrait; margin: 12mm; }
+      html, body { background: #fff !important; color: #000 !important; }
+      .page { width: 100%; margin: 0; padding: 0; border: 0; border-radius: 0; background: #fff !important; }
+      h1, h2, h3, p, li, th, td, .sub, .brand, .footer, .secret { color: #000 !important; }
+      .box, th, .secret { background: #fff !important; }
+      .no-print { display: none !important; }
+      h2 { break-after: avoid; }
+      table, .box { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="secret">CONFIDENTIAL — SUPER_ADMIN / MASTER LOGIN ONLY — DO NOT SHARE WITH CLIENTS OR STAFF</div>
+    <p class="brand">OZONE Enterprise ERP · Confidential Founder Playbook</p>
+    <h1>Founder Playbook / مالک کا خفیہ پلے بک</h1>
+    <p class="sub">Syed Shoaib Ali Shah Bukhari (Bukharihub) · © 2026 All Rights Reserved. This file is a founder artefact and is never linked from any client-facing screen.</p>
+    <div class="no-print"><button type="button" onclick="window.print()">Print / Save PDF</button></div>
+
+    <h2>Part A — Project Identity &amp; Technical Architecture Summary</h2>
+    <h3>A1. Identity</h3>
+    <ul>
+      <li>Product: OZONE Enterprise ERP. Package: <code>ozone-enterprise-erp</code> v1.0.0.</li>
+      <li>Live web URL: <strong>https://ozoneso.vercel.app</strong>. Vercel project: <code>ozoneso</code> (team <code>bukharihubs-projects</code>).</li>
+      <li>Backend: Supabase Postgres/PostgREST, custom token sessions, RLS, RPCs, triggers and Storage bucket <code>company-logos</code>.</li>
+      <li>Frontend: Next.js 16 App Router, React 19, Tailwind 4, TypeScript, lucide-react, XLSX.</li>
+      <li>Desktop: Electron 45 + electron-builder NSIS x64; packaged app opens the live web URL; offline/expired-license branded screens; native print.</li>
+      <li>Brand: Engineered &amp; Developed by Syed Shoaib Ali Shah Bukhari (Bukharihub) · © 2026 All Rights Reserved.</li>
+    </ul>
+    <h3>A2. Feature map</h3>
+    <table>
+      <tr><th>Area</th><th>What exists</th></tr>
+      <tr><td>Dashboard</td><td>KPIs (orders, revenue, fulfilment, recovery), monthly value chart, customer segments, live system status cards.</td></tr>
+      <tr><td>Orders</td><td>Sales orders, stock validation, pending cartons, booking user, print, lock checks.</td></tr>
+      <tr><td>GDN / Gate Pass</td><td>Dispatch documents; only voucher type that moves FG stock; vehicle/driver/remarks; print.</td></tr>
+      <tr><td>Invoices</td><td>Section 23 sales tax invoices from unbilled GDNs; 18% tax, 4% further tax, 236G advance tax; registered/unregistered templates.</td></tr>
+      <tr><td>Receipts</td><td>Bank receipts against invoices, shared bank accounts, amount in words, ledger/aging impact.</td></tr>
+      <tr><td>Ledger / Reports</td><td>Booker-wise ledger, aging buckets, CSV, full Excel export, printable reports.</td></tr>
+      <tr><td>Products / Customers</td><td>Opening/current cartons and pieces, generated pcs/carton, HS code, tax status, bank details.</td></tr>
+      <tr><td>Administration</td><td>Users, roles, permission matrix, customer logins, company wizard, licence/demo controls, factory reset, logo.</td></tr>
+      <tr><td>Customer Portal</td><td>Linked customers, multi-customer order queue, order tracking, invoice print, hidden rates.</td></tr>
+      <tr><td>Guides</td><td>EN/UR master user guide, confidential SUPER_ADMIN-only playbook served through a server-enforced route.</td></tr>
+    </table>
+    <h3>A3. Database cheat-sheet</h3>
+    <p><strong>Static tables:</strong> <code>sys_companies</code> (tenant master, licence/demo/lock), <code>sys_users</code> (role, permissions, linked customers, hide rates, bypass), <code>sys_sessions</code> (12-hour tokens), <code>sys_counters</code> (company/year voucher sequence).</p>
+    <p><strong>Per-company dynamic tables:</strong> <code>{code}_products</code>, <code>{code}_customers</code>, <code>{code}_master_ledger</code>. The unified ledger stores all four voucher types: <code>SALES_ORDER</code>, <code>GDN_GATE_PASS</code>, <code>SALES_TAX_INVOICE</code>, <code>BANK_RECEIPT</code>.</p>
+    <p><strong>Enums:</strong> roles <code>SUPER_ADMIN / COMPANY_ADMIN / CUSTOMER / STORE_FG / ACCOUNTS</code>; product type <code>REGISTERED / UNREGISTERED</code>; registration <code>Register / Unregister</code>; income tax <code>Filer / Non Filer</code>; statuses <code>PENDING / PARTIAL_DELIVERED / DELIVERED / INVOICED / PARTIAL_PAID / PAID</code>.</p>
+    <p><strong>Core RPCs:</strong> <code>app_authenticate</code>, <code>app_logout</code>, <code>session_user</code>, <code>is_super_admin</code>, <code>check_company</code>, <code>next_voucher_no</code>, <code>create_company</code>, <code>create_company_user</code>, <code>update_company_user</code>, <code>list_company_users</code>, <code>create_voucher</code>, <code>insert_master_ledger</code>, <code>sync_sales_order</code>, <code>import_company_data</code>, <code>change_own_password</code>, <code>update_company_settings</code>, <code>extend_company_demo</code>, <code>convert_company_to_full_license</code>, <code>factory_reset_company</code>.</p>
+    <p><strong>Triggers/logic:</strong> product stock init, ledger stock (only GDN moves stock), sales-order sync, ledger insert/mutation guards, company profile super-admin guard, tax-rate defaults, user defaults.</p>
+    <h3>A4. Security architecture</h3>
+    <ul>
+      <li>Custom session token stored in localStorage and sent as <code>x-ozone-session</code>; Supabase Auth sessions are disabled.</li>
+      <li>RLS + SECURITY DEFINER functions enforce company isolation and voucher-type permissions; the UI mirrors, but does not replace, database checks.</li>
+      <li>Three lock layers: company (inactive/demo expired/licence expired), voucher (3-day, cutoff date, downstream record), desktop (expired lock file + offline screen).</li>
+      <li>Confidential playbook is fetched from <code>/api/founder-playbook</code>, which re-verifies <code>is_super_admin()</code> server-side before returning content; never bundle it into client JS.</li>
+      <li>Seed demo credentials in <code>supabase/erp/04_seed.sql</code> must be rotated before any real client handover.</li>
+    </ul>
+    <h3>A5. Deploy / build commands</h3>
+    <ul>
+      <li><code>npm run lint</code> → <code>tsc --noEmit</code>; <code>npm run build</code> → Next production build.</li>
+      <li><code>npx vercel --prod --yes</code> → production deploy to <code>ozoneso.vercel.app</code>.</li>
+      <li><code>npm run dist</code> → NSIS installer at <code>release/OZONE-Enterprise-Setup-1.0.0.exe</code>.</li>
+      <li><code>npm run electron:build:company -- --company=CODE --expiry=YYYY-MM-DD --name="Company Name"</code> → company-locked installer.</li>
+    </ul>
+    <div class="box ur"><strong>حصہ A — خلاصہ:</strong> یہ پروجیکٹ Next.js ویب ایپ، Supabase ڈیٹابیس، کسٹم سیشنز، RLS، RPCs اور Electron ونڈوز ایپ پر مشتمل ہے۔ اہم جدولیں <code>sys_companies</code>، <code>sys_users</code>، <code>sys_sessions</code>، <code>sys_counters</code> اور ہر کمپنی کے <code>_products</code>، <code>_customers</code>، <code>_master_ledger</code> ہیں۔ دستاویزات کا سلسلہ آرڈر → GDN → انوائس → رسید → لیجر ہے۔ صرف GDN اسٹاک بدلتا ہے۔ تین لاک لیئرز ہیں: کمپنی، واؤچر اور ڈیسک ٹاپ۔ خفیہ پلے بک سرور پر <code>is_super_admin()</code> چیک کے بعد ہی ملتی ہے۔ لائیو ایڈریس <strong>https://ozoneso.vercel.app</strong> ہے۔</div>
+
+    <h2>Part B — Target Industry, Value Proposition &amp; Client Lead Generation Blueprint</h2>
+    <h3>B1. Who needs this software</h3>
+    <ul>
+      <li><strong>Core ICP:</strong> diaper, baby-care and FMCG distributors/wholesalers in Pakistan managing cartons, pieces, bookers and tax invoices.</li>
+      <li><strong>Cities:</strong> Karachi (first priority: SITE, Korangi, North Karachi, Gulistan-e-Johar industrial clusters), Lahore, Faisalabad, Islamabad/Rawalpindi, Multan, Peshawar; then GCC, UK and US small distributors.</li>
+      <li><strong>Buyers:</strong> owner/founder, company admin, store manager, accounts manager, distributor booker.</li>
+      <li><strong>Trigger events:</strong> paper registers losing money, GST/Section 23 invoice mistakes, stock discrepancies, 30+ day receivables, demo expiry of a competitor tool.</li>
+    </ul>
+    <h3>B2. Value proposition</h3>
+    <ul>
+      <li>One controlled chain from order to cash with automatic voucher numbers and tax.</li>
+      <li>Role-separated data: store cannot invoice, accounts cannot dispatch, customer sees only own orders and no rates.</li>
+      <li>Owner controls licences, demo days, suspension and factory reset without touching code.</li>
+      <li>Cloud web plus Windows desktop installer for branch-level usage.</li>
+      <li>Fast onboarding through CSV product/customer import and company wizard.</li>
+    </ul>
+    <h3>B3. Lead generation blueprint</h3>
+    <ol>
+      <li><strong>Facebook / LinkedIn demo funnel:</strong> post 45-second clips of order → GDN → invoice → receipt; CTA "Free 7-day OZONE demo on WhatsApp".</li>
+      <li><strong>WhatsApp free-trial onboarding:</strong> collect company name/code, product list and customer list; create demo company; send credentials + guide link; day-3 check-in; day-6 conversion call.</li>
+      <li><strong>Industrial area targeting:</strong> visit/phone distributors in Karachi SITE/Korangi and Lahore/Faisalabad wholesale markets; offer a 20-minute on-site stock-and-ledger audit.</li>
+      <li><strong>Referral loop:</strong> ask satisfied distributors for one peer introduction in exchange for extended demo days.</li>
+      <li><strong>Bukharihub advisory cross-sell:</strong> bundle ERP setup with process design, staff training, tax-workflow advisory and custom branding; sell implementation, not just a login.</li>
+      <li><strong>Retention:</strong> weekly aging report review, monthly backup/licence check, quarterly feature review.</li>
+    </ol>
+    <h3>B4. Suggested 3-tier pricing</h3>
+    <table>
+      <tr><th>Tier</th><th>Price</th><th>Includes</th></tr>
+      <tr><td>Free Demo Trial</td><td>PKR 0 for 7 days</td><td>One company, sample data, all core modules, owner contact support.</td></tr>
+      <tr><td>Monthly / Annual Cloud Subscription</td><td>Suggested PKR 8,000/month or PKR 80,000/year; Growth PKR 15,000/month or PKR 150,000/year</td><td>Hosted web app, user seats per plan, updates, WhatsApp support, guides, backups.</td></tr>
+      <tr><td>Custom White-Label License</td><td>Suggested one-time PKR 350,000+ with annual support</td><td>Branding, custom company-locked installer, data import, training, priority support, optional custom reports.</td></tr>
+    </table>
+    <h3>B5. Client deployment / handover checklist</h3>
+    <ol>
+      <li>Create company via Super Admin wizard; set code, name, expiry, owner contact and max users.</li>
+      <li>Import products and customers CSV; verify opening stock and tax/filer flags.</li>
+      <li>Create Company Admin, Store/FG, Accounts and linked Customer logins; rotate all seed credentials.</li>
+      <li>Set company logo, bank details, NTN/STRN, address and entry lock date if required.</li>
+      <li>Run one complete test: SO → GDN → Invoice → Receipt → Ledger → Aging → Print.</li>
+      <li>Share the EN/UR master user guide; demonstrate Change Password and sign-out hygiene.</li>
+      <li>Decide cloud-only vs desktop installer; for desktop, build company-locked setup.exe and test launch + print + offline retry.</li>
+      <li>Record licence renewal date and WhatsApp support contact in the owner playbook.</li>
+    </ol>
+    <div class="box ur"><strong>حصہ B — خلاصہ:</strong> ہدف ڈائپر اور FMCG ڈسٹری بیوٹرز ہیں، خاص طور پر کراچی (SITE، کورنگی)، لاہور، فیصل آباد اور اسلام آباد۔ فنل: Facebook/LinkedIn ڈیمو → WhatsApp 7 دن ٹرائل → انڈسٹریل ایریا آؤٹ ریچ → ریفرل → بخاری ہب ایڈوائزری کے ساتھ_cross-sell۔ قیمتیں: مفت 7 دن، کلاؤڈ ماہانہ/سالانہ، اور کسٹم وائیٹ لیبل لائسنس۔ ہینڈاوور میں کمپنی وِزرڈ، CSV امپورٹ، صارف بنانا، کرنسی/سیٹنگز، مکمل ٹیسٹ سلسلہ، گائیڈ شیئر، ڈیسک ٹاپ ٹیسٹ اور لائسنس ریکارڈ شامل ہیں۔</div>
+    <div class="footer">CONFIDENTIAL · Syed Shoaib Ali Shah Bukhari (Bukharihub) · © 2026 All Rights Reserved</div>
+  </div>
+</body>
+</html>

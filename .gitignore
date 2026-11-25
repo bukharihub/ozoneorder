@@ -1,0 +1,16 @@
+node_modules/
+build/
+dist/
+release/
+out/
+.next/
+coverage/
+.DS_Store
+*.log
+*.tsbuildinfo
+.env*
+!.env.example
+.vercel/
+electron/locked-company.json
+electron/dist/
+electron/build/

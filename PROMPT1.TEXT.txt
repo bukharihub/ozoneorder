@@ -1,0 +1,20 @@
+## FEATURE UPGRADE: SINGLE-SCREEN BULK MULTI-CUSTOMER ORDER POSTING SHEET (FOR DISTRIBUTORS / BOOKERS)
+
+In the Customer / Distributor Ordering Portal (`role === 'CUSTOMER'`), when a distributor/booker (like "MUJEEB BAHI") has multiple linked customers (`linked_customer_ids.length > 1`), currently only one customer's order is easily submitted while the remaining linked customers require awkward manual switching.
+
+Upgrade the **"Place New Order"** tab for multi-customer accounts into a fast, unmistakable **Multi-Customer Bulk Order Entry & Posting Workspace** (while also keeping single-customer mode simple if only 1 customer is linked):
+
+### 1. All Linked Customers Visible Together with Clear Status Badges
+- At the top of **"Place New Order"**, display a clear **Linked Customers Strip / Cards** showing **every linked customer** (e.g., all 3 or 15 customers linked to `MUJEEB BAHI`) with:
+  - Customer Business Name & `Register` / `Unregister` badge.
+  - Live Draft Cartons counter (`0 Ctns` or `25 Ctns in Draft`) and Today's Posted Order badge (`✓ Posted: SO-2026-xx` or `Not Ordered Yet`).
+- Clicking any customer card immediately switches the product list below to that customer's eligible products (`REGISTERED` vs `UNREGISTERED`) and preserves their draft carton quantities in memory!
+
+### 2. Multi-Customer Draft Cart & One-Click Batch Order Submission
+- Allow the distributor to enter carton quantities for **Customer 1**, click **Customer 2** to enter their carton quantities, click **Customer 3** to enter their carton quantities—holding all of them together in a unified **"Multi-Customer Order Batch Review"** panel at the bottom.
+- In the **Batch Review & Submit** panel, display a clean grouped summary showing **each customer separately** with their selected items and total cartons (e.g., *Customer 1: 25 Ctns*, *Customer 2: 40 Ctns*, *Customer 3: 15 Ctns*).
+- Provide two clear submission options:
+  1. **"Submit Current Customer Order Only"** (posts a single `SALES_ORDER` for the active customer and automatically advances to the next un-ordered customer).
+  2. **"Post All [N] Customer Orders Separately"** (loops through every customer who has cartons in the draft batch, creates **separate individual `SALES_ORDER` vouchers (`SO-xxx`)** in `{code}_master_ledger`—one per customer, each tagged with `booked_by_user_id` & `booked_by_name`—and displays a final confirmation table listing every generated `SO-xxx` number side-by-side with its Customer Name).
+
+Verify `npm run lint` and `npm run build` pass, and deploy to Vercel (`https://vercel.app`).

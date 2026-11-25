@@ -1,0 +1,17 @@
+node_modules/
+release/
+dist/
+coverage/
+.vercel/
+.git/
+*.exe
+*.blockmap
+*.log
+.env*
+!.env.example
+
+.next/
+out/
+tsconfig.tsbuildinfo
+legacy-src/
+legacy-pages/

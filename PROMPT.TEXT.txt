@@ -1,0 +1,25 @@
+## FEATURE UPGRADE: BULK & FULL CUSTOMER SELECTION WITH AUTO-GROUPED ORDERING QUEUE (REGISTERED FIRST, THEN UNREGISTERED) & LIVE FG STOCK GUARD
+
+Upgrade the Customer / Distributor Ordering Portal (`role === 'CUSTOMER'`) to implement exact **Bulk Selection** and **Full Selection** with zero mixing between Registered and Unregistered product catalogs:
+
+### 1. Step 1 — Bulk Selection & Full Selection (`Checkboxes` + `Select All` / `Clear`)
+- When a Distributor/Booker logs in (e.g., `MUJEEB BAHI` with 15 linked customers), display all customers from `user.linked_customer_ids` in a clean selection table/grid with:
+  - Individual **Checkboxes** so the user can pick any subset (e.g., 3 or 5 customers out of 15).
+  - Prominent **"Select All ({Total})"** (Full Selection) and **"Clear Selection"** buttons.
+  - Clear **`Registered`** vs **`Unregistered`** status badges on every customer row.
+- **Smart Auto-Ordering by Registration Type (Zero Mixing):**
+  - When the user clicks **"Proceed with Selected Customers ([N]) ➔"**, automatically sort the selected queue so **all `Register` customers come first**, followed by **all `Unregister` customers** (while showing a clear queue bar: `Registered Group (1 of 2) ➔ Registered Group (2 of 2) ➔ Unregistered Group (3 of 3)`). This guarantees the user finishes all Registered product orders cleanly before switching to Unregistered product orders without any confusion or mixing.
+
+### 2. Step 2 — Customer-by-Customer Order Entry & Live FG Stock Restriction
+- Step through the sorted queue one customer at a time (`Customer {i} of {N}: {Business Name} — [{Register / Unregister}]`).
+- Dynamically load **only** `REGISTERED` products when the active customer is `Register`, and **only** `UNREGISTERED` products when the active customer is `Unregister`.
+- **Live FG Stock Display & Hard Limit (`+ / -` Controls):**
+  - Show real-time available Finished Goods stock (`FG Stock: {remaining_ctns} Ctns`, subtracting any cartons already reserved for earlier customers in the current batch).
+  - Strictly block `+` and numeric input from exceeding available `FG Stock` (`ordered_ctns <= remaining_ctns`), and disable out-of-stock items.
+- Clicking **"Save & Next Customer ➔"** saves that customer's line items in the batch queue and automatically loads the next selected customer.
+
+### 3. Step 3 — Final Review & Separate Individual Sales Order Submission
+- On the final review screen, display each selected customer in its own separate summary card (`Customer Name`, `Register/Unregister`, `Items`, `Total Cartons`).
+- Clicking **"Submit All [N] Customer Orders"** creates **separate, individual `SALES_ORDER` records (`SO-xxx`)** in `{code}_master_ledger`—one per customer, each tagged with `booked_by_user_id` & `booked_by_name`—and displays a confirmation list showing every generated `SO-xxx` number alongside its Customer Name, with a direct button to **"Track My Orders"**.
+
+Verify `npm run lint` and `npm run build` pass, and deploy to Vercel (`https://vercel.app`).

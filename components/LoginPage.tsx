@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { ArrowRight, Building2, KeyRound, LockKeyhole, ShieldCheck, UserRound } from 'lucide-react'
 import { checkCompany } from '@/lib/api'
-import { errorMessage } from '@/lib/format'
+import { friendlyErrorMessage } from '@/lib/format'
 import { useApp } from './AppProvider'
 import { CompanyLogo } from './CompanyLogo'
 import { DeveloperBadge, DeveloperFooter } from './DeveloperBranding'
@@ -51,7 +51,10 @@ export function LoginPage() {
       setCompanyNote('')
       if (strict) setError('Company code not found')
     } catch (caught) {
-      if (strict) setError(errorMessage(caught))
+      setCompanyName('')
+      setLogoUrl('')
+      setCompanyNote('')
+      if (strict) setError(friendlyErrorMessage(caught))
     } finally {
       setChecking(false)
     }
@@ -93,7 +96,7 @@ export function LoginPage() {
     try {
       await login(companyCode, username, password)
     } catch (caught) {
-      const message = errorMessage(caught)
+      const message = friendlyErrorMessage(caught)
       if (message.toLowerCase().includes('license') || message.toLowerCase().includes('demo period') || message.toLowerCase().includes('locked')) {
         setLocked(true)
         setError(message)

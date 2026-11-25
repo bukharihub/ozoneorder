@@ -21,5 +21,26 @@ export const dateDMY = (value: any) => {
 
 export const todayIso = () => new Date().toISOString().slice(0, 10)
 
-export const errorMessage = (error: any) =>
-  error instanceof Error ? error.message : typeof error === 'string' ? error : 'Something went wrong'
+export const CONNECTION_ERROR_MESSAGE = 'Unable to connect to server. Please check your internet connection or server configuration.'
+
+export const errorMessage = (error: any) => {
+  const raw = error instanceof Error ? error.message : typeof error === 'string' ? error : 'Something went wrong'
+  return raw.split('\n')[0].trim() || 'Something went wrong'
+}
+
+export const friendlyErrorMessage = (error: any) => {
+  const message = errorMessage(error).toLowerCase()
+  if (
+    error instanceof TypeError ||
+    message.includes('failed to fetch') ||
+    message.includes('network') ||
+    message.includes('load failed') ||
+    message.includes('offline') ||
+    message.includes('invalid url') ||
+    message.includes('configuration') ||
+    message.includes('supabase')
+  ) {
+    return CONNECTION_ERROR_MESSAGE
+  }
+  return errorMessage(error)
+}

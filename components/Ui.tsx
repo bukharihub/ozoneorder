@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export function Button({
   children,
@@ -98,9 +98,22 @@ export function Modal({ title, onClose, children, wide = false }: {
   children: React.ReactNode
   wide?: boolean
 }) {
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [onClose])
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#020617]/80 p-4 backdrop-blur-sm">
-      <div className={`glass-panel max-h-[92vh] w-full overflow-auto rounded-2xl ${wide ? 'max-w-6xl' : 'max-w-3xl'}`}>
+    <div className="fixed inset-0 z-[120] flex items-center justify-center bg-[#020617]/80 p-4 backdrop-blur-sm" onClick={onClose}>
+      <div className={`glass-panel max-h-[92vh] w-full overflow-auto rounded-2xl ${wide ? 'max-w-6xl' : 'max-w-3xl'}`} role="dialog" aria-modal="true" aria-label={title} onClick={(event) => event.stopPropagation()}>
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-cyan-400/20 bg-slate-950/90 px-4 py-3">
           <h3 className="text-sm font-bold text-cyan-50">{title}</h3>
           <Button variant="ghost" onClick={onClose} aria-label="Close">✕</Button>

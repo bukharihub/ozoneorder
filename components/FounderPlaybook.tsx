@@ -46,7 +46,7 @@ export function FounderPlaybook() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  if (!session || session.user.role !== 'SUPER_ADMIN') return null
+  if (!session || String(session.user.role || '').toUpperCase() !== 'SUPER_ADMIN') return null
 
   const load = async () => {
     setLoading(true); setError('')
@@ -79,7 +79,7 @@ export function FounderPlaybook() {
 
   return (
     <>
-      <Button variant="ghost" onClick={openPlaybook} aria-label="Open confidential founder playbook"><ShieldCheck className="h-3.5 w-3.5" /> <span className="hidden md:inline">Founder Playbook</span></Button>
+      <Button variant="ghost" onClick={openPlaybook} aria-label="Open confidential founder playbook" title="Founder Playbook"><ShieldCheck className="h-3.5 w-3.5" /> <span className="sm:hidden">Playbook</span><span className="hidden sm:inline">Founder Playbook</span></Button>
       {open && (
         <Modal title="Confidential Founder Playbook" wide onClose={() => setOpen(false)}>
           <div className="space-y-3">
@@ -100,6 +100,9 @@ export function FounderPlaybook() {
                 {data.sections.map((section) => <Section key={section.id} section={section} lang={lang} />)}
               </div>
             )}
+            <div className="flex justify-end border-t border-cyan-400/15 pt-3">
+              <Button variant="secondary" onClick={() => setOpen(false)}>Close Playbook</Button>
+            </div>
           </div>
         </Modal>
       )}

@@ -1,4 +1,5 @@
 {
+  "name": "ozoneorder",
   "framework": "nextjs",
   "installCommand": "npm install --ignore-scripts",
   "buildCommand": "npm run build",
